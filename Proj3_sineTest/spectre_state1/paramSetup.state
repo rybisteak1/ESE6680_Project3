@@ -1,0 +1,2 @@
+"_EXPR_1" (tran_stop fields "200*VAR(\"T\")")
+"_EXPR_2" (tran_stop fields "200/VAR(\"fs\")")

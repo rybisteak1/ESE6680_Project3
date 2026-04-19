@@ -1,0 +1,40 @@
+// VerilogA for ESE5700p1, dac8bit, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module dac8bit(vd7, vd6, vd5, vd4, vd3, vd2, vd1, vd0, vout);
+electrical vd7, vd6, vd5, vd4, vd3, vd2, vd1, vd0, vout;
+parameter real vref=256 from [0:inf);
+parameter real mismatch_fact=0 from [0:inf);
+parameter real trise=1n from (0:inf);
+parameter real tfall=1n from (0:inf);
+parameter real tdel=0  from [0:inf);
+parameter real vtrans=0.6;
+
+   real bit_var[0:7];
+   real out_scaled;// scaled version of the DAC output
+
+   analog begin
+
+      @ ( initial_step ) begin
+ generate j ( 0, 7 ) begin
+    bit_var[j] = 1;
+ end
+
+      end
+
+      out_scaled = 0;
+      out_scaled = out_scaled + ((V(vd7) > vtrans) ? (bit_var[7]/2) : 0);
+      out_scaled = out_scaled + ((V(vd6) > vtrans) ? (bit_var[6]/4) : 0);
+      out_scaled = out_scaled + ((V(vd5) > vtrans) ? (bit_var[5]/8) : 0);
+      out_scaled = out_scaled + ((V(vd4) > vtrans) ? (bit_var[4]/16) : 0);
+      out_scaled = out_scaled + ((V(vd3) > vtrans) ? (bit_var[3]/32) : 0);
+      out_scaled = out_scaled + ((V(vd2) > vtrans) ? (bit_var[2]/64) : 0);
+      out_scaled = out_scaled + ((V(vd1) > vtrans) ? (bit_var[1]/128) : 0);
+      out_scaled = out_scaled + ((V(vd0) > vtrans) ? (bit_var[0]/256) : 0);
+      V(vout) <+ transition(vref*out_scaled, tdel, trise,
+                             tfall);
+    end
+endmodule
+
