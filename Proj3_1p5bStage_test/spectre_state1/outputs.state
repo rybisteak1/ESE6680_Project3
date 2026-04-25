@@ -44,7 +44,7 @@ list(tmp1 tmp2)
 list(tmp1)
 )
 tmp1->value = nil
-tmp1->plot = nil
+tmp1->plot = 't
 tmp1->save = 't
 tmp1->march = nil
 tmp1->index = 1
@@ -79,7 +79,18 @@ tmp3 = '?result
 tmp4 = "tran"
 list(tmp1 tmp2 tmp3 tmp4)
 )
-tmp3 = 1.9000000000000000e-06
+tmp3 = (let
+(tmp1 tmp2 tmp3)
+tmp1 = 'quotient
+tmp2 = 5.5000000000000000e+00
+tmp3 = (let
+(tmp1 tmp2)
+tmp1 = 'VAR
+tmp2 = "fs"
+list(tmp1 tmp2)
+)
+list(tmp1 tmp2 tmp3)
+)
 list(tmp1 tmp2 tmp3)
 )
 tmp1->signal = nil
@@ -136,7 +147,18 @@ tmp3 = '?result
 tmp4 = "tran"
 list(tmp1 tmp2 tmp3 tmp4)
 )
-tmp3 = 1.9000000000000000e-06
+tmp3 = (let
+(tmp1 tmp2 tmp3)
+tmp1 = 'quotient
+tmp2 = 5.5000000000000000e+00
+tmp3 = (let
+(tmp1 tmp2)
+tmp1 = 'VAR
+tmp2 = "fs"
+list(tmp1 tmp2)
+)
+list(tmp1 tmp2 tmp3)
+)
 list(tmp1 tmp2 tmp3)
 )
 tmp1->signal = nil
